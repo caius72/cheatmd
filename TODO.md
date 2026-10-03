@@ -4,8 +4,8 @@
 - [x] Slice 0: gates — CI, traceability, lint, format, coverage floor, secrets, merge protection
 - [x] Slice 1: show the sheet (R-1.1, R-1.2, R-1.5, R-2.*, R-3.1, R-3.3–R-3.5)
 - [x] Slice 2: always fullscreen (R-6.*) — manual checks T-27–T-29 pending on an unlocked session
-- [ ] Slice 3: fuzzy find (R-4.*, R-5.1, R-5.4)
-- [ ] Slice 4: return focus (R-5.2, R-5.3)
+- [x] Slice 3: fuzzy find (R-4.*, R-5.1, R-5.4) — manual T-26 pending
+- [x] Slice 4: return focus (R-5.2, R-5.3) — manual T-26 pending
 - [ ] Slice 5: cards and zoom (R-3.2, R-3.6)
 - [ ] Slice 6: live reload and errors (R-1.3, R-1.4)
 

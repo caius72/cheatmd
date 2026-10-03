@@ -7,6 +7,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     private static let displayKey = "display"
     private let model = SheetModel()
     private var window: FullscreenWindow?
+    private let tracker = PreviousAppTracker<RunningApp>(
+        ownProcessIdentifier: ProcessInfo.processInfo.processIdentifier)
+    private var activationObserver: NSObjectProtocol?
 
     func applicationDidFinishLaunching(_ notification: Notification) {
         let window = FullscreenWindow(
@@ -17,6 +20,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         window.setFrame(launchScreen().visibleFrame, display: false)
         self.window = window
         addMoveMenuItem()
+        trackPreviousApp()
+        NSEvent.addLocalMonitorForEvents(matching: .keyDown) { [weak self] event in
+            self?.handle(event) ?? event
+        }
         NSApp.activate()
         window.makeKeyAndOrderFront(nil)
         // Once the window is on screen; the backstops below cover an app that is not active yet.
@@ -50,6 +57,47 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         item.keyEquivalentModifierMask = [.control, .command]
         item.target = self
         NSApp.windowsMenu?.addItem(item)
+    }
+
+    /// Feeds every app activation to the tracker, starting with whatever is frontmost now.
+    private func trackPreviousApp() {
+        if let front = NSWorkspace.shared.frontmostApplication { tracker.activated(RunningApp(front)) }
+        activationObserver = NSWorkspace.shared.notificationCenter.addObserver(
+            forName: NSWorkspace.didActivateApplicationNotification, object: nil, queue: .main
+        ) { [weak self] note in
+            guard let app = note.userInfo?[NSWorkspace.applicationUserInfoKey] as? NSRunningApplication else {
+                return
+            }
+            MainActor.assumeIsolated { self?.tracker.activated(RunningApp(app)) }
+        }
+    }
+
+    /// Typing goes to the query (R-4.1, R-5.1, R-5.2). Chords with Command or Control, and keys
+    /// that type nothing (arrows, function keys), pass through to the menus and the scroll view.
+    private func handle(_ event: NSEvent) -> NSEvent? {
+        let modifiers = event.modifierFlags.intersection(.deviceIndependentFlagsMask)
+        guard modifiers.isDisjoint(with: [.command, .control]), let key = Self.key(for: event) else {
+            return event
+        }
+        let (query, effect) = KeyReducer.reduce(model.query, key)
+        model.query = query
+        if effect == .returnFocus { tracker.previous?.app.activate() }
+        return nil
+    }
+
+    private static func key(for event: NSEvent) -> KeyReducer.Key? {
+        switch event.keyCode {
+        case 53: return .escape
+        case 36, 76: return .enter
+        case 51: return .backspace
+        default:
+            guard let text = event.characters, !text.isEmpty,
+                text.unicodeScalars.allSatisfy({
+                    !CharacterSet.controlCharacters.contains($0) && !(0xF700...0xF8FF).contains($0.value)
+                })
+            else { return nil }
+            return .character(text)
+        }
     }
 
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool { true }
@@ -106,4 +154,14 @@ final class FullscreenWindow: NSWindow {
     func leaveFullScreenToMove() {
         if styleMask.contains(.fullScreen) { super.toggleFullScreen(nil) }
     }
+}
+
+/// A running app as the tracker sees it.
+final class RunningApp: ActivatableApp {
+    let app: NSRunningApplication
+
+    init(_ app: NSRunningApplication) { self.app = app }
+
+    var processIdentifier: Int32 { app.processIdentifier }
+    var isTerminated: Bool { app.isTerminated }
 }

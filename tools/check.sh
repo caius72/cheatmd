@@ -7,6 +7,6 @@ swift format lint --strict --recursive CheatCore/Package.swift CheatCore/Sources
 tools/lint.sh
 swift test --package-path CheatCore --enable-code-coverage
 tools/coverage.sh
-swift test --package-path CheatCore -c release --filter Performance
+swift test --package-path CheatCore -c release -Xswiftc -enable-testing --filter Performance
 xcodebuild -project cheatmd.xcodeproj -scheme cheatmd -destination 'platform=macOS,arch=arm64' -quiet build \
     CODE_SIGNING_ALLOWED=NO
