@@ -10,6 +10,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     private let tracker = PreviousAppTracker<RunningApp>(
         ownProcessIdentifier: ProcessInfo.processInfo.processIdentifier)
     private var activationObserver: NSObjectProtocol?
+    private var sheetTimer: Timer?
+    private var detector: ChangeDetector?
 
     func applicationDidFinishLaunching(_ notification: Notification) {
         let window = FullscreenWindow(
@@ -24,6 +26,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         NSEvent.addLocalMonitorForEvents(matching: .keyDown) { [weak self] event in
             self?.handle(event) ?? event
         }
+        watchSheet()
         NSApp.activate()
         window.makeKeyAndOrderFront(nil)
         // Once the window is on screen; the backstops below cover an app that is not active yet.
@@ -59,6 +62,18 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         NSApp.windowsMenu?.addItem(item)
     }
 
+    /// Reloads the sheet when the file changes (R-1.3, R-1.4); the query stays.
+    private func watchSheet() {
+        detector = ChangeDetector(url: model.source.url)
+        let seconds = Double(ChangeDetector.pollInterval.components.seconds)
+        sheetTimer = Timer.scheduledTimer(withTimeInterval: seconds, repeats: true) { [weak self] _ in
+            MainActor.assumeIsolated {
+                guard let self, self.detector?.changed() == true else { return }
+                self.model.reload()
+            }
+        }
+    }
+
     /// Feeds every app activation to the tracker, starting with whatever is frontmost now.
     private func trackPreviousApp() {
         if let front = NSWorkspace.shared.frontmostApplication { tracker.activated(RunningApp(front)) }
@@ -76,6 +91,15 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     /// that type nothing (arrows, function keys), pass through to the menus and the scroll view.
     private func handle(_ event: NSEvent) -> NSEvent? {
         let modifiers = event.modifierFlags.intersection(.deviceIndependentFlagsMask)
+        if modifiers == .command || modifiers == [.command, .shift] {
+            switch event.charactersIgnoringModifiers {
+            case "=", "+": model.zoom.zoomIn()
+            case "-": model.zoom.zoomOut()
+            case "0": model.zoom.reset()
+            default: return event
+            }
+            return nil
+        }
         guard modifiers.isDisjoint(with: [.command, .control]), let key = Self.key(for: event) else {
             return event
         }

@@ -12,7 +12,7 @@ Derived from [Requirements_Specification.md](Requirements_Specification.md).
 │ SheetSource ──► SheetParser ──► Section tree ──► Matcher ──► [ResultSection]          │
 │ ChangeDetector    (Foundation markdown)            ▲   (highlights as an attribute)   │
 │                                                    │                                  │
-│ KeyReducer: (query, Key) → (query, Effect?)   Zoom   ColumnLayout   PreviousAppTracker │
+│ KeyReducer: (query, Key) → (query, Effect?)   Zoom   CardLayout   PreviousAppTracker   │
 └──────────────────────────────────────────────────────────────────────────────────────┘
         ▲ pure values, unit-tested with `swift test`
 ┌──────────────────── cheatmd app target (AppKit + SwiftUI) ──────────────────────────┐
@@ -34,7 +34,7 @@ imports only Foundation, so `swift test` covers it in seconds.
 | `Matcher` | Query → ordered `ResultSection`s with highlighted text | R-3.1, R-4.2–R-4.6 |
 | `KeyReducer` | Key press → new query and an optional `.returnFocus` effect | R-4.1, R-5.1, R-5.2 |
 | `PreviousAppTracker` | Remember the last other app to activate; forget it once it quits | R-5.2, R-5.3 |
-| `ColumnLayout` | Column count for a width and zoom; assign cards to the shortest column | R-3.2 |
+| `CardLayout` | Cards for the results, column count for a width and zoom, cards into the shortest column | R-3.2 |
 | `Zoom` | 10% steps clamped to 50–300%, reset | R-3.6 |
 | `DisplayChoice` | Remembered display while connected, else the main one; the next display for a move | R-6.3, R-6.6 |
 
@@ -83,5 +83,5 @@ the result.
 | 2 Always fullscreen | R-6.1–R-6.6 | 1 | done (manual T-27–T-29 pending) |
 | 3 Fuzzy find | R-4.1–R-4.7, R-5.1, R-5.4 | 1 | done (manual T-26 pending) |
 | 4 Return focus | R-5.2, R-5.3 | 3 | done (manual T-26 pending) |
-| 5 Cards and zoom | R-3.2, R-3.6 | 1 | todo |
-| 6 Live reload and errors | R-1.3, R-1.4 | 1 | todo |
+| 5 Cards and zoom | R-3.2, R-3.6 | 1 | done (manual T-30 zoom persistence pending) |
+| 6 Live reload and errors | R-1.3, R-1.4 | 1 | done (manual T-30 pending) |

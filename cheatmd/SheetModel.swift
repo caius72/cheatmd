@@ -9,6 +9,10 @@ final class SheetModel {
     private(set) var sheet = SheetSection(title: "", level: 0)
     private(set) var error: String?
     var query = ""
+    /// Persisted across launches (R-3.6).
+    var zoom = Zoom(percent: UserDefaults.standard.object(forKey: "zoom") as? Int ?? 100) {
+        didSet { UserDefaults.standard.set(zoom.percent, forKey: "zoom") }
+    }
 
     init(source: SheetSource = SheetSource()) {
         self.source = source
