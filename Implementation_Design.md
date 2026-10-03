@@ -36,6 +36,7 @@ imports only Foundation, so `swift test` covers it in seconds.
 | `PreviousAppTracker` | Remember the last other app to activate; forget it once it quits | R-5.2, R-5.3 |
 | `ColumnLayout` | Column count for a width and zoom; assign cards to the shortest column | R-3.2 |
 | `Zoom` | 10% steps clamped to 50–300%, reset | R-3.6 |
+| `DisplayChoice` | Remembered display while connected, else the main one; the next display for a move | R-6.3, R-6.6 |
 
 **The app target** (`cheatmd/`) is a thin shell that wires AppKit events to CheatCore and draws
 the result.
@@ -45,8 +46,14 @@ the result.
   `WindowGroup` can neither veto leaving fullscreen nor guarantee a single window.
 - `FullscreenWindow` overrides `toggleFullScreen(_:)` to ignore the call when already
   fullscreen. It also re-enters fullscreen in `windowDidExitFullScreen`, a backstop for any path
-  that bypasses the override. Its frame autosave name makes AppKit restore it to the last
-  display, and AppKit moves it onto a connected screen when that display is gone (R-6.3).
+  that bypasses the override. It opens on the last
+  display. A fullscreen window cannot be dragged between displays, so the app remembers the
+  display's name (`NSScreen.localizedName`, which is stable for a Sidecar iPad) whenever the window
+  changes screen, and places the window on that screen before entering fullscreen (R-6.3).
+  Move to Next Display leaves fullscreen through a path that bypasses the override, moves the
+  window, and re-enters fullscreen from `windowDidExitFullScreen` (R-6.6).
+- Link text is styled but not clickable: the sheet is display-only, and a clickable link could
+  open any URL scheme.
 - A local `keyDown` monitor maps events to `KeyReducer.Key`. Cmd-+, Cmd-− and Cmd-0 go to `Zoom`;
   other Cmd chords pass through to the menu (Cmd-Q).
 - `NSWorkspace.didActivateApplicationNotification` feeds `PreviousAppTracker`; the
@@ -73,7 +80,7 @@ the result.
 |---|---|---|---|
 | 0 Gates | CI pipeline, traceability check, lint, format, coverage floor, secret scan; package and app build | — | done |
 | 1 Show the sheet | R-1.1, R-1.2, R-1.5, R-2.1–R-2.5, R-3.1, R-3.3, R-3.4, R-3.5 | 0 | done (T-25 manual check pending on the iPad) |
-| 2 Always fullscreen | R-6.1–R-6.5 | 1 | todo |
+| 2 Always fullscreen | R-6.1–R-6.6 | 1 | done (manual T-27–T-29 pending) |
 | 3 Fuzzy find | R-4.1–R-4.7, R-5.1, R-5.4 | 1 | todo |
 | 4 Return focus | R-5.2, R-5.3 | 3 | todo |
 | 5 Cards and zoom | R-3.2, R-3.6 | 1 | todo |

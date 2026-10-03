@@ -37,9 +37,11 @@ below.
 | T-25 | Inline styling, monospaced keys and scrolling, checked on the iPad | R-3.3, R-3.4, R-3.5 | D | manual |
 | T-26 | Return to the previous app; typing after activation | R-5.2, R-5.4 | D | manual |
 | T-27 | Fullscreen at launch and cannot be left | R-6.1, R-6.2 | D | manual |
-| T-28 | Reopens on the last display; falls back to the main display | R-6.3 | D | manual |
+| T-28 | Move to the iPad; reopens on the last display; falls back to the main display | R-6.3, R-6.6 | D | manual |
 | T-29 | Closing quits; a second open activates the running instance | R-6.4, R-6.5 | D | manual |
 | T-30 | Live reload while filtering, error and recovery, zoom persistence | R-1.3, R-1.4, R-3.6 | D | manual |
+| T-31 | The remembered display is chosen while connected; otherwise, or when none is remembered, the main display | R-6.3 | A | implemented |
+| T-32 | The next display after the current one wraps around after the last; with one display it is the current one | R-6.6 | A | implemented |
 
 ## Manual checks
 
@@ -61,7 +63,8 @@ layer reaches. Run them on the iPad (Sidecar) before marking a slice done that d
   - Launch: the app is fullscreen with no clicks.
   - Each of View → Exit Full Screen, Ctrl-Cmd-F and the green button leaves it fullscreen.
 - **T-28:**
-  - Drag the app to the iPad, quit and relaunch: it opens fullscreen on the iPad.
+  - Press Ctrl-Cmd-→ until the app is on the iPad; it stays fullscreen after each move.
+  - Quit and relaunch: it opens fullscreen on the iPad.
   - Disconnect Sidecar and relaunch: it opens fullscreen on the main display.
 - **T-29:**
   - Close the window (Cmd-W): the app quits.
