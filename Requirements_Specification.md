@@ -147,6 +147,11 @@ R-6.4 Closing the window MUST quit the app.
 
 R-6.5 Opening the app while it runs MUST activate the running instance, not start a second one.
 
+R-6.6 The app SHOULD offer Window → Move to Next Display (Ctrl-Cmd-→). It moves the window to the
+next connected display, wrapping around after the last, and the window is fullscreen again
+afterwards. With one display it MUST do nothing. A fullscreen window cannot be dragged, so this
+is how the window first reaches the iPad.
+
 ## 4. Non-goals
 
 - **The global hotkey.** The owner binds it with an external tool, for example

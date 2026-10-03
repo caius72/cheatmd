@@ -29,7 +29,7 @@ struct SectionView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
             if section.level > 0 {
-                Text(section.title)
+                Text(section.title.inertLinks)
                     .font(
                         section.level == 1
                             ? .largeTitle.bold() : section.level == 2 ? .title2.bold() : .headline
@@ -54,7 +54,7 @@ struct BlockView: View {
         case .entry(let entry):
             EntryRow(keys: AttributedString(entry.keys), description: entry.description)
         case .prose(let text):
-            Text(text).foregroundStyle(.secondary)
+            Text(text.inertLinks).foregroundStyle(.secondary)
         case .code(let text):
             Text(text).font(.body.monospaced()).foregroundStyle(.secondary)
         }
@@ -74,7 +74,17 @@ struct EntryRow: View {
                 .padding(.vertical, 2)
                 .background(.tint.opacity(0.15), in: .rect(cornerRadius: 5))
                 .frame(minWidth: 110, alignment: .leading)
-            Text(description)
+            Text(description.inertLinks)
+        }
+    }
+}
+
+extension AttributedString {
+    /// Link text keeps a link style but cannot be clicked: the sheet is display-only, and a
+    /// clickable link could open any URL scheme.
+    var inertLinks: AttributedString {
+        transformingAttributes(\.link) { link in
+            if link.value != nil { link.replace(with: \.underlineStyle, value: Text.LineStyle.single) }
         }
     }
 }

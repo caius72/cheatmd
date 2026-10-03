@@ -2,11 +2,10 @@ import SwiftUI
 
 @main
 struct CheatmdApp: App {
-    @State private var model = SheetModel()
+    @NSApplicationDelegateAdaptor private var delegate: AppDelegate
 
+    // The window is AppKit's (see AppDelegate); this scene only satisfies `App`.
     var body: some Scene {
-        WindowGroup {
-            SheetView(model: model)
-        }
+        Settings { EmptyView() }.commandsRemoved()
     }
 }
