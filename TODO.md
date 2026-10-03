@@ -6,8 +6,9 @@
 - [x] Slice 2: always fullscreen (R-6.*) — manual checks T-27–T-29 pending on an unlocked session
 - [x] Slice 3: fuzzy find (R-4.*, R-5.1, R-5.4) — manual T-26 pending
 - [x] Slice 4: return focus (R-5.2, R-5.3) — manual T-26 pending
-- [ ] Slice 5: cards and zoom (R-3.2, R-3.6)
-- [ ] Slice 6: live reload and errors (R-1.3, R-1.4)
+- [x] Slice 5: cards and zoom (R-3.2, R-3.6) — manual T-30 pending
+- [x] Slice 6: live reload and errors (R-1.3, R-1.4) — manual T-30 pending
+- [ ] Run manual checks T-25–T-30 on the iPad (unlocked session)
 
 ## Known quirks
 - macOS refuses fullscreen while the screen is locked (`windowDidFailToEnterFullScreen`); the

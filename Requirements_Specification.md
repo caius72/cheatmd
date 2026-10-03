@@ -79,8 +79,8 @@ block quotes) MUST be displayed in document order, and MUST NOT be entries.
 
 R-3.1 With an empty query, the app MUST display the whole sheet in document order.
 
-R-3.2 Each section at the shallowest heading level present in the sheet MUST be displayed as a
-card. Cards MUST flow into columns: at the default zoom, a window 1366 points wide MUST show 3
+R-3.2 Each top-level section (one not nested in another section) MUST be displayed as a card;
+content before the first heading forms an untitled first card. Cards MUST flow into columns: at the default zoom, a window 1366 points wide MUST show 3
 columns. Narrower windows MUST show fewer columns, but never fewer than 1.
 
 R-3.3 Bold, italic, code spans and link text MUST be displayed with distinct styling.
