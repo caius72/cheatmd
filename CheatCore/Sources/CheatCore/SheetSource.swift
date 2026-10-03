@@ -8,6 +8,3 @@ public struct SheetSource: Sendable {
         url = home.appending(path: ".config/cheatmd/cheatmd.md")
     }
 }
-
-// Planted lint violation: force_try.
-public let planted = try! String(contentsOfFile: "/etc/hosts", encoding: .utf8)
