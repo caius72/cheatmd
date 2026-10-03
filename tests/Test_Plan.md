@@ -25,15 +25,15 @@ below.
 | T-13 | Width 1366 at zoom 1.0 gives 3 columns; width 400 gives 1; width 0 gives 1; width 1366 at zoom 2.0 gives 1; cards go to the shortest column, ties to the leftmost | R-3.2 | A | planned |
 | T-14 | In a sheet whose shallowest heading is `##`, the `##` sections are the cards | R-3.2 | A | planned |
 | T-15 | Zoom in and out moves in 10% steps, stops at 50% and 300%, and resets to 100% | R-3.6 | A | planned |
-| T-16 | A printable key appends to the query; Backspace removes the last character; Backspace on an empty query leaves it empty | R-4.1 | A | planned |
-| T-17 | `vi ma` matches an entry under `vi → Macros` and none under `tmux`; matching ignores case; `acro` does not match `macro` (not at a word start); `%` matches `C-b %`; an entry matching only some terms does not match | R-4.2 | A | planned |
-| T-18 | With a query, only matching entries appear, each with its full heading path; prose, code blocks and sections without a match are absent | R-4.3 | A | planned |
-| T-19 | Every word-start occurrence of each term is highlighted in the heading path, keys and description; an occurrence inside a word is not | R-4.4 | A | planned |
-| T-20 | A section whose heading path holds 2 terms comes before one holding 1, which comes before one holding 0; ties keep document order; entries keep document order | R-4.5 | A | planned |
-| T-21 | A query matching nothing yields no sections and the message `No matches for “<query>”` | R-4.6 | A | planned |
-| T-22 | Filtering a generated sheet of 2,000 entries for a 2-term query takes under 50 ms (release build) | R-4.7 | A | planned |
-| T-23 | Esc with a non-empty query clears it and has no effect; Esc with an empty query and Return with any query produce `.returnFocus` and leave the query unchanged | R-5.1, R-5.2 | A | planned |
-| T-24 | The tracker ignores cheatmd's own activation and returns the last other app; it returns nothing before any app activated or once that app has quit | R-5.2, R-5.3 | A | planned |
+| T-16 | A printable key appends to the query; Backspace removes the last character; Backspace on an empty query leaves it empty | R-4.1 | A | implemented |
+| T-17 | `vi ma` matches an entry under `vi → Macros` and none under `tmux`; matching ignores case; `acro` does not match `macro` (not at a word start); `%` matches `C-b %`; an entry matching only some terms does not match | R-4.2 | A | implemented |
+| T-18 | With a query, only matching entries appear, each with its full heading path; prose, code blocks and sections without a match are absent | R-4.3 | A | implemented |
+| T-19 | Every word-start occurrence of each term is highlighted in the heading path, keys and description; an occurrence inside a word is not | R-4.4 | A | implemented |
+| T-20 | A section whose heading path holds 2 terms comes before one holding 1, which comes before one holding 0; ties keep document order; entries keep document order | R-4.5 | A | implemented |
+| T-21 | A query matching nothing yields no sections and the message `No matches for “<query>”` | R-4.6 | A | implemented |
+| T-22 | Filtering a generated sheet of 2,000 entries for a 2-term query takes under 50 ms (release build) | R-4.7 | A | implemented |
+| T-23 | Esc with a non-empty query clears it and has no effect; Esc with an empty query and Return with any query produce `.returnFocus` and leave the query unchanged | R-5.1, R-5.2 | A | implemented |
+| T-24 | The tracker ignores cheatmd's own activation and returns the last other app; it returns nothing before any app activated or once that app has quit | R-5.2, R-5.3 | A | implemented |
 | T-25 | Inline styling, monospaced keys and scrolling, checked on the iPad | R-3.3, R-3.4, R-3.5 | D | manual |
 | T-26 | Return to the previous app; typing after activation | R-5.2, R-5.4 | D | manual |
 | T-27 | Fullscreen at launch and cannot be left | R-6.1, R-6.2 | D | manual |

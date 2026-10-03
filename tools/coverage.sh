@@ -2,7 +2,7 @@
 # Fails when CheatCore region coverage drops below the floor. Run after
 # `swift test --enable-code-coverage`. The floor only ever rises.
 set -eu
-COVERAGE_FLOOR=95
+COVERAGE_FLOOR=96
 cd "$(dirname "$0")/../CheatCore"
 python3 - "$(swift test --show-codecov-path)" "$PWD/Sources/" "$COVERAGE_FLOOR" <<'PY'
 import json, sys

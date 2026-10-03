@@ -81,7 +81,7 @@ the result.
 | 0 Gates | CI pipeline, traceability check, lint, format, coverage floor, secret scan; package and app build | — | done |
 | 1 Show the sheet | R-1.1, R-1.2, R-1.5, R-2.1–R-2.5, R-3.1, R-3.3, R-3.4, R-3.5 | 0 | done (T-25 manual check pending on the iPad) |
 | 2 Always fullscreen | R-6.1–R-6.6 | 1 | done (manual T-27–T-29 pending) |
-| 3 Fuzzy find | R-4.1–R-4.7, R-5.1, R-5.4 | 1 | todo |
-| 4 Return focus | R-5.2, R-5.3 | 3 | todo |
+| 3 Fuzzy find | R-4.1–R-4.7, R-5.1, R-5.4 | 1 | done (manual T-26 pending) |
+| 4 Return focus | R-5.2, R-5.3 | 3 | done (manual T-26 pending) |
 | 5 Cards and zoom | R-3.2, R-3.6 | 1 | todo |
 | 6 Live reload and errors | R-1.3, R-1.4 | 1 | todo |

@@ -24,8 +24,9 @@ All gates run with **one local command:** `tools/check.sh`. CI runs the same scr
   and removes it in `deinit`. Layer B tests pass it to `SheetSource(home:)` as the home folder,
   so the tests never touch the real `~/.config`.
 - **`FakeApp`** implements the tracker's `ActivatableApp` protocol, with settable `isTerminated`.
-- **T-22** generates its 2,000-entry sheet in code. It runs under `swift test -c release`, where
-  timing is meaningful; in debug builds it is skipped via a condition trait.
+- **T-22** generates its 2,000-entry sheet in code. It runs under
+  `swift test -c release -Xswiftc -enable-testing` (release builds need `-enable-testing` for
+  `@testable import`), where timing is meaningful; in debug builds a condition trait skips it.
 
 ## CI
 
