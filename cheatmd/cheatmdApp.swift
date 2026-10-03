@@ -2,9 +2,11 @@ import SwiftUI
 
 @main
 struct CheatmdApp: App {
+    @State private var model = SheetModel()
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            SheetView(model: model)
         }
     }
 }

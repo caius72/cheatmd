@@ -62,8 +62,9 @@ nearest preceding section whose heading level is lower.
 
 R-2.2 A list item whose text starts with a code span MUST be an entry. Its keys are the leading
 code spans together with the whitespace and punctuation between them; its description is the
-rest of the item's first paragraph, trimmed. Example: `` - `@a` / `@@` replay macro `` has keys
-`@a / @@` and description `replay macro`.
+rest of the item's first paragraph, trimmed of whitespace and of one leading `-`, `–`, `—` or
+`:`. Example: `` - `@a` / `@@` replay macro `` has keys `@a / @@` and description
+`replay macro`; `` - `x` – delete char `` has description `delete char`.
 
 R-2.3 A body row of a table with two or more columns MUST be an entry. Its keys are the first
 cell; its description is the remaining cells joined by a space. The header row is not an entry.
