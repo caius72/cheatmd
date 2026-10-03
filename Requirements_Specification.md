@@ -162,3 +162,7 @@ R-6.5 Opening the app while it runs MUST activate the running instance, not star
 ## 5. Open questions
 
 None.
+
+### R-99 Planted
+
+R-99.1 The app MUST prove the traceability gate fails.
