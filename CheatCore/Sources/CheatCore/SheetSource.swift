@@ -8,3 +8,6 @@ public struct SheetSource: Sendable {
         url = home.appending(path: ".config/cheatmd/cheatmd.md")
     }
 }
+
+/// Planted: never called, so coverage drops below the floor.
+public func plantedUncovered(_ value: Int) -> Int { value + 1 }
