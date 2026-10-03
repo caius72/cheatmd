@@ -30,7 +30,7 @@ imports only Foundation, so `swift test` covers it in seconds.
 |---|---|---|
 | `SheetSource` | Resolve the path from a home folder, create the file from the sample, read it as UTF-8, describe failures | R-1.1, R-1.2, R-1.4, R-1.5 |
 | `ChangeDetector` | Fingerprint the file (inode, size, modification date); report changes | R-1.3 |
-| `SheetParser` | Markdown → `Section` tree of entries, prose and code blocks | R-2.* |
+| `SheetParser` | Markdown → `SheetSection` tree of entries, prose and code blocks | R-2.* |
 | `Matcher` | Query → ordered `ResultSection`s with highlighted text | R-3.1, R-4.2–R-4.6 |
 | `KeyReducer` | Key press → new query and an optional `.returnFocus` effect | R-4.1, R-5.1, R-5.2 |
 | `PreviousAppTracker` | Remember the last other app to activate; forget it once it quits | R-5.2, R-5.3 |
@@ -71,8 +71,8 @@ the result.
 
 | Slice | Delivers | Depends on | Status |
 |---|---|---|---|
-| 0 Gates | CI pipeline, traceability check, lint, format, coverage floor, secret scan; package and app build | — | todo |
-| 1 Show the sheet | R-1.1, R-1.2, R-1.5, R-2.1–R-2.5, R-3.1, R-3.3, R-3.4, R-3.5 | 0 | todo |
+| 0 Gates | CI pipeline, traceability check, lint, format, coverage floor, secret scan; package and app build | — | done |
+| 1 Show the sheet | R-1.1, R-1.2, R-1.5, R-2.1–R-2.5, R-3.1, R-3.3, R-3.4, R-3.5 | 0 | done (T-25 manual check pending on the iPad) |
 | 2 Always fullscreen | R-6.1–R-6.5 | 1 | todo |
 | 3 Fuzzy find | R-4.1–R-4.7, R-5.1, R-5.4 | 1 | todo |
 | 4 Return focus | R-5.2, R-5.3 | 3 | todo |

@@ -11,17 +11,17 @@ below.
 | ID | Test | Covers | Layer | Status |
 |---|---|---|---|---|
 | T-1 | The sheet path for home `/h` is `/h/.config/cheatmd/cheatmd.md` | R-1.1 | A | implemented |
-| T-2 | With no `.config/cheatmd` folder, first load creates the folders and the file from the sample; the sample parses to top-level sections that include `vi` and `tmux` | R-1.2 | B | planned |
-| T-3 | Loading an existing file leaves its bytes and modification date unchanged, even when it differs from the sample | R-1.5 | B | planned |
+| T-2 | With no `.config/cheatmd` folder, first load creates the folders and the file from the sample; the sample parses to top-level sections that include `vi` and `tmux` | R-1.2 | B | implemented |
+| T-3 | Loading an existing file leaves its bytes and modification date unchanged, even when it differs from the sample | R-1.5 | B | implemented |
 | T-4 | The change detector reports an in-place write, a save-by-rename and a delete-then-recreate; it reports nothing when the file is untouched; its poll interval is at most 2 s | R-1.3 | B | planned |
-| T-5 | Loading a file that is missing after start-up, has no read permission, or holds invalid UTF-8 yields an error whose message contains the path and the reason; a later successful load yields the sheet again | R-1.4 | B | planned |
-| T-6 | `#`, `##`, `###`, `##` nest as expected; `#` followed directly by `###` nests the `###` under the `#`; a second `#` starts a new top-level section | R-2.1 | A | planned |
-| T-7 | A list item starting with a code span is an entry with those keys and that description; `` `@a` / `@@` replay `` has keys `@a / @@`; an item whose code span is not first is prose; an entry in a nested list is found; an item that is only a code span has an empty description | R-2.2 | A | planned |
-| T-8 | Body rows of 2- and 3-column tables are entries (3 columns: description is cells 2 and 3 joined by a space); the header row is not an entry; an escaped `\|` stays in the cell | R-2.3 | A | planned |
-| T-9 | An entry before the first heading is in the untitled root section; an entry after a subheading belongs to the subsection, not the parent | R-2.4 | A | planned |
-| T-10 | A paragraph, a code block, a block quote and a non-entry list item are kept in document order and are not entries | R-2.5 | A | planned |
-| T-11 | An empty or whitespace-only query yields every section, entry and prose block in document order | R-3.1 | A | planned |
-| T-12 | Description text keeps its bold, italic, code and link runs | R-3.3 | A | planned |
+| T-5 | Loading a file that is missing after start-up, has no read permission, or holds invalid UTF-8 yields an error whose message contains the path and the reason; a later successful load yields the sheet again | R-1.4 | B | implemented |
+| T-6 | `#`, `##`, `###`, `##` nest as expected; `#` followed directly by `###` nests the `###` under the `#`; a second `#` starts a new top-level section | R-2.1 | A | implemented |
+| T-7 | A list item starting with a code span is an entry with those keys and that description; `` `@a` / `@@` replay `` has keys `@a / @@`; an item whose code span is not first is prose; an entry in a nested list is found; `` `x` – delete `` has description `delete`; an item that is only a code span has an empty description | R-2.2 | A | implemented |
+| T-8 | Body rows of 2- and 3-column tables are entries (3 columns: description is cells 2 and 3 joined by a space); a row with an empty description cell is an entry with an empty description; the header row is not an entry; an escaped `\|` stays in the cell | R-2.3 | A | implemented |
+| T-9 | An entry before the first heading is in the untitled root section; an entry after a subheading belongs to the subsection, not the parent | R-2.4 | A | implemented |
+| T-10 | A paragraph, a code block, a block quote, a non-entry list item, a rule and an ordered list item (with its number) are kept in document order and are not entries | R-2.5 | A | implemented |
+| T-11 | An empty or whitespace-only query yields every section, entry and prose block in document order | R-3.1 | A | implemented |
+| T-12 | Description text keeps its bold, italic, code and link runs | R-3.3 | A | implemented |
 | T-13 | Width 1366 at zoom 1.0 gives 3 columns; width 400 gives 1; width 0 gives 1; width 1366 at zoom 2.0 gives 1; cards go to the shortest column, ties to the leftmost | R-3.2 | A | planned |
 | T-14 | In a sheet whose shallowest heading is `##`, the `##` sections are the cards | R-3.2 | A | planned |
 | T-15 | Zoom in and out moves in 10% steps, stops at 50% and 300%, and resets to 100% | R-3.6 | A | planned |
