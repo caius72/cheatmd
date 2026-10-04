@@ -35,13 +35,16 @@ public enum Matcher {
 
         var scored: [(score: Int, section: ResultSection)] = []
         visit(sheet, path: []) { path, entries in
+            // Headings are shared by every entry in the section: check them once.
             let titles = path.map { String($0.characters) }
+            let inTitles = terms.filter { term in titles.contains { !occurrences(of: term, in: $0).isEmpty } }
+            let rest = terms.filter { !inTitles.contains($0) }
             let matching = entries.filter { entry in
-                let fields = titles + [entry.keys, String(entry.description.characters)]
-                return terms.allSatisfy { term in fields.contains { !occurrences(of: term, in: $0).isEmpty } }
+                let fields = [entry.keys, String(entry.description.characters)]
+                return rest.allSatisfy { term in fields.contains { !occurrences(of: term, in: $0).isEmpty } }
             }
             guard !matching.isEmpty else { return }
-            let score = terms.count { term in titles.contains { !occurrences(of: term, in: $0).isEmpty } }
+            let score = inTitles.count
             let section = ResultSection(
                 path: path.map { highlight(terms, in: $0) },
                 entries: matching.map {
