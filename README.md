@@ -5,6 +5,12 @@ hierarchical markdown file at `~/.config/cheatmd/cheatmd.md`, and fuzzy-filters 
 `vi ma` brings up the vi macro shortcuts, highlighted. Built for a 13" iPad used as a Sidecar
 display. Bind a global hotkey to `open -a cheatmd` with your tool of choice.
 
+![cheatmd fullscreen on a 13" iPad: vi, tmux and macOS cards](docs/screenshot.png)
+
+Typing filters as you go; `vi ma` brings the vi macros and marks to the front:
+
+![cheatmd filtered by "vi ma", matches highlighted](docs/screenshot-filter.png)
+
 ## Use
 
 | Key | Does |
