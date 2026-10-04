@@ -21,7 +21,6 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         window.delegate = self
         window.setFrame(launchScreen().visibleFrame, display: false)
         self.window = window
-        addMoveMenuItem()
         trackPreviousApp()
         NSEvent.addLocalMonitorForEvents(matching: .keyDown) { [weak self] event in
             self?.handle(event) ?? event
@@ -41,25 +40,6 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     private func enterFullScreenIfNeeded() {
         guard let window, !window.styleMask.contains(.fullScreen), moveTarget == nil else { return }
         window.toggleFullScreen(nil)
-    }
-
-    /// Window → Move to Next Display (R-6.6). Added through AppKit: SwiftUI command buttons do
-    /// not fire in an app without SwiftUI windows, and with no SwiftUI scene commands there is no
-    /// Window menu to begin with.
-    private func addMoveMenuItem() {
-        if NSApp.windowsMenu == nil {
-            let menu = NSMenu(title: "Window")
-            let top = NSMenuItem(title: "Window", action: nil, keyEquivalent: "")
-            top.submenu = menu
-            NSApp.mainMenu?.addItem(top)
-            NSApp.windowsMenu = menu
-        }
-        let arrow = String(UnicodeScalar(UInt16(NSRightArrowFunctionKey)).map(Character.init) ?? " ")
-        let item = NSMenuItem(
-            title: "Move to Next Display", action: #selector(moveToNextDisplay), keyEquivalent: arrow)
-        item.keyEquivalentModifierMask = [.control, .command]
-        item.target = self
-        NSApp.windowsMenu?.addItem(item)
     }
 
     /// Reloads the sheet when the file changes (R-1.3, R-1.4); the query stays.
@@ -91,6 +71,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     /// that type nothing (arrows, function keys), pass through to the menus and the scroll view.
     private func handle(_ event: NSEvent) -> NSEvent? {
         let modifiers = event.modifierFlags.intersection(.deviceIndependentFlagsMask)
+        // Move to Next Display (R-6.6). A key, not a menu item: SwiftUI rebuilds the menus.
+        if modifiers.isSuperset(of: [.control, .command]), event.keyCode == 124 {
+            moveToNextDisplay()
+            return nil
+        }
         if modifiers == .command || modifiers == [.command, .shift] {
             switch event.charactersIgnoringModifiers {
             case "=", "+": model.zoom.zoomIn()
@@ -145,7 +130,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     private var moveTarget: NSScreen?
 
     /// Leaves fullscreen, moves to the next display, and re-enters fullscreen (R-6.6).
-    @objc func moveToNextDisplay() {
+    func moveToNextDisplay() {
         guard let window, let current = window.screen else { return }
         let screens = NSScreen.screens
         let name = DisplayChoice.next(after: current.localizedName, connected: screens.map(\.localizedName))
