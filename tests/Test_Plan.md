@@ -59,6 +59,7 @@ layer reaches. Run them on the iPad (Sidecar) before marking a slice done that d
     returns to Terminal.
   - Repeat, activating cheatmd with Cmd-Tab and then with the Dock: typing reaches the query
     without a click each time.
+  - Typing into the query makes no system alert sound.
 - **T-27:**
   - Launch: the app is fullscreen with no clicks.
   - Each of View → Exit Full Screen, Ctrl-Cmd-F and the green button leaves it fullscreen.
