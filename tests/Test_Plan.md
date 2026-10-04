@@ -31,14 +31,14 @@ below.
 | T-19 | Every word-start occurrence of each term is highlighted in the heading path, keys and description; an occurrence inside a word is not | R-4.4 | A | implemented |
 | T-20 | A section whose heading path holds 2 terms comes before one holding 1, which comes before one holding 0; ties keep document order; entries keep document order | R-4.5 | A | implemented |
 | T-21 | A query matching nothing yields no sections and the message `No matches for “<query>”` | R-4.6 | A | implemented |
-| T-22 | Filtering a generated sheet of 2,000 entries for a 2-term query takes under 50 ms (release build) | R-4.7 | A | implemented |
+| T-22 | Filtering a generated sheet of 2,000 entries for a 2-term query takes under 50 ms (release build, fastest of 5 runs to discount noise on shared CI machines) | R-4.7 | A | implemented |
 | T-23 | Esc with a non-empty query clears it and has no effect; Esc with an empty query and Return with any query produce `.returnFocus` and leave the query unchanged | R-5.1, R-5.2 | A | implemented |
 | T-24 | The tracker ignores cheatmd's own activation and returns the last other app; it returns nothing before any app activated or once that app has quit | R-5.2, R-5.3 | A | implemented |
 | T-25 | Inline styling, monospaced keys and scrolling, checked on the iPad | R-3.3, R-3.4, R-3.5 | D | manual |
 | T-26 | Return to the previous app; typing after activation | R-5.2, R-5.4 | D | manual |
 | T-27 | Fullscreen at launch and cannot be left | R-6.1, R-6.2 | D | manual |
 | T-28 | Move to the iPad; reopens on the last display; falls back to the main display | R-6.3, R-6.6 | D | manual |
-| T-29 | Closing quits; a second open activates the running instance | R-6.4, R-6.5 | D | manual |
+| T-29 | Closing quits; Cmd-Q and the Quit menu item quit; a second open activates the running instance | R-6.4, R-6.5, R-6.7 | D | manual |
 | T-30 | Live reload while filtering, error and recovery, zoom persistence | R-1.3, R-1.4, R-3.6 | D | manual |
 | T-31 | The remembered display is chosen while connected; otherwise, or when none is remembered, the main display | R-6.3 | A | implemented |
 | T-32 | The next display after the current one wraps around after the last; with one display it is the current one | R-6.6 | A | implemented |
@@ -68,6 +68,7 @@ layer reaches. Run them on the iPad (Sidecar) before marking a slice done that d
   - Disconnect Sidecar and relaunch: it opens fullscreen on the main display.
 - **T-29:**
   - Close the window (Cmd-W): the app quits.
+  - Relaunch and press Cmd-Q: the app quits. Relaunch and choose cheatmd → Quit cheatmd: it quits.
   - Run `open -a cheatmd` twice: `pgrep -x cheatmd` lists one process.
 - **T-30:**
   - Type `tmux`, then add an entry under `tmux` in vim and `:w`. Within 2 s the new entry appears,

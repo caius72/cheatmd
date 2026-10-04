@@ -50,7 +50,8 @@ the result.
   display. A fullscreen window cannot be dragged between displays, so the app remembers the
   display's name (`NSScreen.localizedName`, which is stable for a Sidecar iPad) whenever the window
   changes screen, and places the window on that screen before entering fullscreen (R-6.3).
-  Move to Next Display leaves fullscreen through a path that bypasses the override, moves the
+  Ctrl-Cmd-→ (Move to Next Display, a key rather than a menu item, because SwiftUI rebuilds the
+  menus) leaves fullscreen through a path that bypasses the override, moves the
   window, and re-enters fullscreen from `windowDidExitFullScreen` (R-6.6).
 - Link text is styled but not clickable: the sheet is display-only, and a clickable link could
   open any URL scheme.
