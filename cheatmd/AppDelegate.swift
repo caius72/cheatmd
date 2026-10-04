@@ -23,22 +23,27 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         self.window = window
         trackPreviousApp()
         NSEvent.addLocalMonitorForEvents(matching: .keyDown) { [weak self] event in
-            self?.handle(event) ?? event
+            // Not `self?.handle(event) ?? event`: handle's nil means "consumed", and `??` would
+            // pass the key on to the window, which beeps at keys it does not handle.
+            guard let self else { return event }
+            return self.handle(event)
         }
         watchSheet()
         NSApp.activate()
         window.makeKeyAndOrderFront(nil)
         // Once the window is on screen; the backstops below cover an app that is not active yet.
-        DispatchQueue.main.async { window.toggleFullScreen(nil) }
+        DispatchQueue.main.async { [weak self] in self?.enterFullScreenIfNeeded() }
     }
 
     /// Backstops for a fullscreen request that did not take (R-6.1): AppKit refuses fullscreen
     /// while the app is inactive or the screen is locked, and `activate()` is only a request.
+    /// Asking while inactive also makes AppKit beep, so only an active app asks.
     func applicationDidBecomeActive(_ notification: Notification) { enterFullScreenIfNeeded() }
     func windowDidBecomeKey(_ notification: Notification) { enterFullScreenIfNeeded() }
 
     private func enterFullScreenIfNeeded() {
-        guard let window, !window.styleMask.contains(.fullScreen), moveTarget == nil else { return }
+        guard NSApp.isActive, let window, !window.styleMask.contains(.fullScreen), moveTarget == nil
+        else { return }
         window.toggleFullScreen(nil)
     }
 
