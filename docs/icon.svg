@@ -1,0 +1,236 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <defs>
+    <!-- macOS Icon Drop Shadow Filter -->
+    <filter id="iconDropShadow" x="-20%" y="-15%" width="140%" height="145%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="34" result="blurAmbient" />
+      <feOffset in="blurAmbient" dx="0" dy="32" result="offsetAmbient" />
+      <feComponentTransfer in="offsetAmbient" result="shadowAmbient">
+        <feFuncA type="linear" slope="0.42" />
+      </feComponentTransfer>
+      <feGaussianBlur in="SourceAlpha" stdDeviation="12" result="blurDirect" />
+      <feOffset in="blurDirect" dx="0" dy="12" result="offsetDirect" />
+      <feComponentTransfer in="offsetDirect" result="shadowDirect">
+        <feFuncA type="linear" slope="0.25" />
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode in="shadowAmbient" />
+        <feMergeNode in="shadowDirect" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <!-- Keycap Drop Shadows -->
+    <filter id="darkKeyShadow" x="-25%" y="-20%" width="150%" height="160%">
+      <feDropShadow dx="0" dy="5" stdDeviation="6" flood-color="#000000" flood-opacity="0.5" />
+    </filter>
+    <filter id="yellowKeyGlow" x="-30%" y="-30%" width="160%" height="170%">
+      <feDropShadow dx="0" dy="6" stdDeviation="10" flood-color="#F59E0B" flood-opacity="0.45" />
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.2" />
+    </filter>
+
+    <!-- Teal Glow Filter for Markdown # -->
+    <filter id="tealGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="16" />
+    </filter>
+
+    <!-- Amber Glow Filter for Selection Match -->
+    <filter id="amberGlow" x="-30%" y="-50%" width="160%" height="200%">
+      <feGaussianBlur stdDeviation="22" />
+    </filter>
+
+    <!-- Yellow Bar Glow Filter -->
+    <filter id="barGlow" x="-10%" y="-40%" width="120%" height="180%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="8" result="blur" />
+      <feColorMatrix in="blur" type="matrix" values="0 0 0 0 0.98  0 0 0 0 0.74  0 0 0 0 0.14  0 0 0 0.45 0" result="coloredBlur" />
+      <feMerge>
+        <feMergeNode in="coloredBlur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <!-- Body Squircle Clipping Mask -->
+    <clipPath id="squircleClip">
+      <rect x="100" y="100" width="824" height="824" rx="185" ry="185" />
+    </clipPath>
+
+    <!-- Gradients -->
+    <!-- Dark Charcoal Body Gradient -->
+    <linearGradient id="charcoalBody" x1="512" y1="100" x2="512" y2="924" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#262932" />
+      <stop offset="45%" stop-color="#1A1C23" />
+      <stop offset="100%" stop-color="#121318" />
+    </linearGradient>
+
+    <!-- Top Highlight Sheen -->
+    <linearGradient id="topSheen" x1="512" y1="100" x2="512" y2="480" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.09" />
+      <stop offset="40%" stop-color="#FFFFFF" stop-opacity="0.02" />
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0" />
+    </linearGradient>
+
+    <!-- Squircle Outer Rim Stroke -->
+    <linearGradient id="rimStroke" x1="512" y1="100" x2="512" y2="924" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.16" />
+      <stop offset="25%" stop-color="#FFFFFF" stop-opacity="0.05" />
+      <stop offset="75%" stop-color="#000000" stop-opacity="0.35" />
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.65" />
+    </linearGradient>
+
+    <!-- Dark Keycap Gradients -->
+    <linearGradient id="darkKeycapGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#323743" />
+      <stop offset="100%" stop-color="#1E2129" />
+    </linearGradient>
+    <linearGradient id="darkKeyStroke" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#4B5365" />
+      <stop offset="100%" stop-color="#242831" />
+    </linearGradient>
+
+    <!-- Warm Yellow Keycap Gradients -->
+    <linearGradient id="yellowKeycapGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFD449" />
+      <stop offset="100%" stop-color="#F59E0B" />
+    </linearGradient>
+    <linearGradient id="yellowKeyStroke" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFF2A3" />
+      <stop offset="100%" stop-color="#D97706" />
+    </linearGradient>
+
+    <!-- Teal Markdown Gradient -->
+    <linearGradient id="tealGrad" x1="230" y1="220" x2="285" y2="280" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#34D399" />
+      <stop offset="45%" stop-color="#2DD4BF" />
+      <stop offset="100%" stop-color="#0EA5E9" />
+    </linearGradient>
+
+    <!-- Yellow Match Text Bar Gradient -->
+    <linearGradient id="yellowBarGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#FCD34D" />
+      <stop offset="40%" stop-color="#FBBF24" />
+      <stop offset="100%" stop-color="#F59E0B" />
+    </linearGradient>
+
+    <!-- Slate Inactive Text Bar Gradients -->
+    <linearGradient id="slateBarGrad1" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#464E5E" />
+      <stop offset="100%" stop-color="#353B47" />
+    </linearGradient>
+    <linearGradient id="slateBarGrad2" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#3D4452" />
+      <stop offset="100%" stop-color="#2C313A" />
+    </linearGradient>
+  </defs>
+
+  <!-- Base Icon Squircle with Drop Shadow -->
+  <rect x="100" y="100" width="824" height="824" rx="185" ry="185" fill="url(#charcoalBody)" filter="url(#iconDropShadow)" />
+
+  <!-- Clipped Interior Contents -->
+  <g clip-path="url(#squircleClip)">
+    <!-- Subtle Editor Ambient Warmth for Row Match -->
+    <ellipse cx="512" cy="530" rx="340" ry="70" fill="#F59E0B" opacity="0.12" filter="url(#amberGlow)" />
+
+    <!-- Subtle Top Sheen Overlay -->
+    <rect x="100" y="100" width="824" height="420" fill="url(#topSheen)" pointer-events="none" />
+
+    <!-- Subtle Editor Header Guide Line -->
+    <line x1="210" y1="324" x2="814" y2="324" stroke="#FFFFFF" stroke-opacity="0.04" stroke-width="1.5" stroke-dasharray="8 6" />
+
+    <!-- ========================================== -->
+    <!-- TOP-LEFT: MARKDOWN # MARK IN TEAL          -->
+    <!-- ========================================== -->
+    <g id="markdown-hash">
+      <!-- Soft Ambient Teal Glow -->
+      <ellipse cx="258" cy="250" rx="46" ry="40" fill="#2DD4BF" opacity="0.16" filter="url(#tealGlow)" />
+
+      <!-- Vector Markdown Octothorpe (#) -->
+      <g stroke="url(#tealGrad)" stroke-width="13" stroke-linecap="round">
+        <!-- Horizontal Bars -->
+        <line x1="234" y1="238" x2="284" y2="238" />
+        <line x1="230" y1="262" x2="280" y2="262" />
+        <!-- Slanted Vertical Bars (~7 degrees) -->
+        <line x1="252" y1="224" x2="246" y2="276" />
+        <line x1="274" y1="224" x2="268" y2="276" />
+      </g>
+    </g>
+
+    <!-- ========================================== -->
+    <!-- CHEAT SHEET ROWS CONTAINER                 -->
+    <!-- ========================================== -->
+
+    <!-- ROW 1 (Inactive Shortcut) -->
+    <g id="row-1">
+      <!-- Keycap Pill -->
+      <g filter="url(#darkKeyShadow)">
+        <rect x="232" y="363" width="138" height="74" rx="20" fill="url(#darkKeycapGrad)" stroke="url(#darkKeyStroke)" stroke-width="2" />
+        <!-- Top Keycap Specular Bevel -->
+        <line x1="254" y1="365.5" x2="348" y2="365.5" stroke="#FFFFFF" stroke-opacity="0.12" stroke-width="2" stroke-linecap="round" />
+      </g>
+
+      <!-- Keycap Glyph: Command (⌘) as Pure Vector Path -->
+      <path d="M 294 386 
+               A 7 7 0 1 0 287 393 
+               L 315 393 
+               A 7 7 0 1 0 308 386 
+               L 308 414 
+               A 7 7 0 1 0 315 407 
+               L 287 407 
+               A 7 7 0 1 0 294 414 
+               L 294 386 Z"
+            fill="none" stroke="#94A3B8" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" />
+
+      <!-- Text Bar -->
+      <rect x="404" y="386" width="330" height="28" rx="14" fill="url(#slateBarGrad1)" />
+      <!-- Subtle Text Bar Top Sheen -->
+      <rect x="404" y="386" width="330" height="14" rx="7" fill="#FFFFFF" fill-opacity="0.04" />
+    </g>
+
+    <!-- ROW 2 (Middle Row - Highlighted Search Match) -->
+    <g id="row-2-search-match">
+      <!-- Search Match Selection Plate -->
+      <rect x="206" y="478" width="612" height="104" rx="24" fill="#F59E0B" fill-opacity="0.12" stroke="#F59E0B" stroke-opacity="0.32" stroke-width="1.5" />
+
+      <!-- Highlighted Keycap Pill (Warm Yellow) -->
+      <g filter="url(#yellowKeyGlow)">
+        <rect x="232" y="493" width="138" height="74" rx="20" fill="url(#yellowKeycapGrad)" stroke="url(#yellowKeyStroke)" stroke-width="2" />
+        <!-- Keycap Top Specular Bevel -->
+        <line x1="254" y1="495.5" x2="348" y2="495.5" stroke="#FFFFFF" stroke-opacity="0.42" stroke-width="2" stroke-linecap="round" />
+      </g>
+
+      <!-- Keycap Glyph: 'K' (Search / Cmd-K) in High-Contrast Charcoal -->
+      <g stroke="#181A20" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="294" y1="517" x2="294" y2="543" />
+        <line x1="309" y1="517" x2="295" y2="530" />
+        <line x1="299" y1="526" x2="310" y2="543" />
+      </g>
+
+      <!-- Highlighted Text Bar (Warm Yellow) -->
+      <g filter="url(#barGlow)">
+        <rect x="404" y="516" width="384" height="28" rx="14" fill="url(#yellowBarGrad)" />
+      </g>
+      <!-- Fuzzy-Matched Text Segment Accent -->
+      <rect x="404" y="516" width="130" height="28" rx="14" fill="#FFFBEB" fill-opacity="0.32" />
+    </g>
+
+    <!-- ROW 3 (Inactive Shortcut) -->
+    <g id="row-3" opacity="0.8">
+      <!-- Keycap Pill -->
+      <g filter="url(#darkKeyShadow)">
+        <rect x="232" y="623" width="138" height="74" rx="20" fill="url(#darkKeycapGrad)" stroke="url(#darkKeyStroke)" stroke-width="2" />
+        <!-- Top Keycap Specular Bevel -->
+        <line x1="254" y1="625.5" x2="348" y2="625.5" stroke="#FFFFFF" stroke-opacity="0.12" stroke-width="2" stroke-linecap="round" />
+      </g>
+
+      <!-- Keycap Glyph: Return (↵) as Pure Vector Path -->
+      <path d="M 310 651 L 310 664 L 291 664" fill="none" stroke="#94A3B8" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M 296 659 L 291 664 L 296 669" fill="none" stroke="#94A3B8" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" />
+
+      <!-- Text Bar -->
+      <rect x="404" y="646" width="260" height="28" rx="14" fill="url(#slateBarGrad2)" />
+      <!-- Subtle Text Bar Top Sheen -->
+      <rect x="404" y="646" width="260" height="14" rx="7" fill="#FFFFFF" fill-opacity="0.03" />
+    </g>
+
+    <!-- Squircle Border Inset Rim Stroke -->
+    <rect x="100" y="100" width="824" height="824" rx="185" ry="185" fill="none" stroke="url(#rimStroke)" stroke-width="3" pointer-events="none" />
+  </g>
+</svg>

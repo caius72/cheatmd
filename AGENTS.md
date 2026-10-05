@@ -15,7 +15,8 @@ fuzzy-filters it as you type. Built for a 13" iPad used as a Sidecar display.
 
 - `CheatCore/` — Swift package, Foundation only: all logic and its tests (`swift test`).
 - `cheatmd/` — the app target (AppKit window + SwiftUI views); thin shell over CheatCore.
-- `tools/` — `check.sh` (every gate), `lint.sh`, `coverage.sh`, `check_traceability.py`.
+- `tools/` — `check.sh` (every gate), `lint.sh`, `coverage.sh`, `check_traceability.py`, `icon.sh`
+  (renders `docs/icon.svg`, the icon's source, into the app icon set).
 
 ## Rules
 

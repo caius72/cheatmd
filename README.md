@@ -1,3 +1,5 @@
+<img src="docs/icon.svg" width="128" alt="cheatmd icon">
+
 # cheatmd
 
 An always-fullscreen macOS app that shows your keyboard-shortcut cheat sheet, a plain
