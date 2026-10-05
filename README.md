@@ -15,12 +15,28 @@ Typing filters as you go; `vi ma` brings the vi macros and marks to the front:
 
 ## Install
 
+Needs macOS 26 or later on an Apple Silicon Mac. cheatmd is signed with a Developer ID and
+notarized by Apple, and installs from the
+[caius72/cheatmd Homebrew tap](https://github.com/caius72/homebrew-cheatmd):
+
 ```sh
 brew install --cask caius72/cheatmd/cheatmd
 ```
 
-A notarized build for macOS 26 or later on Apple Silicon, from the
-[caius72/cheatmd tap](https://github.com/caius72/homebrew-cheatmd).
+This puts `cheatmd.app` in `/Applications`. The first launch creates
+`~/.config/cheatmd/cheatmd.md` from a sample (vi, tmux, macOS); edit it to make the sheet yours.
+To put cheatmd on the iPad, press ⌃⌘→ until it is there; it opens on that display from then on.
+Bind a global hotkey (Alfred, Raycast, BetterTouchTool, …) to `open -a cheatmd`.
+
+Upgrade and uninstall:
+
+```sh
+brew upgrade --cask cheatmd
+brew uninstall --cask cheatmd         # removes the app
+brew uninstall --cask --zap cheatmd   # also removes its settings (zoom, display)
+```
+
+Your sheet in `~/.config/cheatmd/` is never removed; delete it yourself if you want it gone.
 
 ## Use
 
