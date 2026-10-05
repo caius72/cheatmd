@@ -31,3 +31,6 @@ else
     echo "Signed but NOT notarized: notarytool profile '$PROFILE' is missing or rejected."
     xcrun notarytool history --keychain-profile "$PROFILE" 2>&1 | tail -1
 fi
+# Unregister the build copy so `open -a cheatmd` (a hotkey's usual command) launches the
+# installed /Applications/cheatmd.app, not this one.
+/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -u "$APP" || true
