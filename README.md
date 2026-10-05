@@ -13,6 +13,15 @@ Typing filters as you go; `vi ma` brings the vi macros and marks to the front:
 
 ![cheatmd filtered by "vi ma", matches highlighted](docs/screenshot-filter.png)
 
+## Install
+
+```sh
+brew install --cask caius72/cheatmd/cheatmd
+```
+
+A notarized build for macOS 26 or later on Apple Silicon, from the
+[caius72/cheatmd tap](https://github.com/caius72/homebrew-cheatmd).
+
 ## Use
 
 | Key | Does |
@@ -33,4 +42,6 @@ Status: all requirements implemented; manual checks pending, see [TODO.md](TODO.
 
 ```sh
 tools/check.sh      # every gate: traceability, format, lint, tests, coverage, app build
+./build.sh          # Developer ID signed Release build, notarized when credentials allow
+./release.sh        # from main: notarized build, GitHub release, Homebrew cask update
 ```
